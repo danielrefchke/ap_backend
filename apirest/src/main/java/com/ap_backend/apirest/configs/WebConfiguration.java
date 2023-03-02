@@ -1,4 +1,4 @@
-package com.ap_backend.apirest.config;
+package com.ap_backend.apirest.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

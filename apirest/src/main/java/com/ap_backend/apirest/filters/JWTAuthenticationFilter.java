@@ -1,10 +1,9 @@
-package com.ap_backend.apirest.filter;
+package com.ap_backend.apirest.filters;
 
-import com.ap_backend.apirest.config.AuthenticationConfigConstants;
+import com.ap_backend.apirest.configs.AuthenticationConfigConstants;
 import com.ap_backend.apirest.models.UserModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;

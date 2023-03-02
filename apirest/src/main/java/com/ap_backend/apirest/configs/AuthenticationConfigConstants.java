@@ -1,4 +1,4 @@
-package com.ap_backend.apirest.config;
+package com.ap_backend.apirest.configs;
 
 public class AuthenticationConfigConstants {
     public static final String SECRET = "Java_to_Dev_Secret";

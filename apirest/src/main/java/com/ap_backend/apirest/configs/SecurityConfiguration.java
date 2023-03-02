@@ -1,7 +1,7 @@
-package com.ap_backend.apirest.config;
+package com.ap_backend.apirest.configs;
 
-import com.ap_backend.apirest.filter.JWTAuthenticationFilter;
-import com.ap_backend.apirest.filter.JWTAuthorizationFilter;
+import com.ap_backend.apirest.filters.JWTAuthenticationFilter;
+import com.ap_backend.apirest.filters.JWTAuthorizationFilter;
 import com.ap_backend.apirest.services.AuthenticationUserService;
 
 import org.springframework.context.annotation.Configuration;
@@ -25,8 +25,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST, AuthenticationConfigConstants.SIGN_UP_URL).permitAll()
-                .antMatchers(HttpMethod.GET, "/users").permitAll()
                 .antMatchers(HttpMethod.GET, "/header").permitAll()
+                .antMatchers(HttpMethod.GET, "/icons").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))

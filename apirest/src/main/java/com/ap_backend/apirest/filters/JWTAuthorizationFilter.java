@@ -1,6 +1,6 @@
-package com.ap_backend.apirest.filter;
+package com.ap_backend.apirest.filters;
 
-import com.ap_backend.apirest.config.AuthenticationConfigConstants;
+import com.ap_backend.apirest.configs.AuthenticationConfigConstants;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 
