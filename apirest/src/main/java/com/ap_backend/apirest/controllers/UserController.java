@@ -15,30 +15,28 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
     @GetMapping()
-    public ResponseEntity<List<UserModel>> Usuarios(){
+    public ResponseEntity<List<UserModel>> users(){
 
-        return ResponseEntity.ok(userService.usuarios());
+        return ResponseEntity.ok(userService.users());
     }
 
     @PostMapping()
     public ResponseEntity<UserModel> postUser(@RequestBody UserModel request){
 
-        userService.guardar(request);
+        userService.save(request);
 
         return ResponseEntity.ok(request);
     }
 
     @PutMapping()
     public ResponseEntity<UserModel> putUser(@RequestBody UserModel request){
-        userService.guardar(request);
+        userService.save(request);
 
         return ResponseEntity.ok(request);
     }
 
     @DeleteMapping()
     public ResponseEntity<Boolean> deleteUser(@RequestBody UserModel request){
-        userService.borrar(request);
-
-        return ResponseEntity.ok(true);
+        return ResponseEntity.ok(userService.delete(request));
     }
 }

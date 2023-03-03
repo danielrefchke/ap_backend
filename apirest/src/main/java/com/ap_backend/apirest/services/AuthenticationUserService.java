@@ -9,15 +9,13 @@ import java.util.Collections;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationUserService implements UserDetailsService {
     private final UserService userService;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserModel model = userService.findByNombre(username);
+        UserModel model = userService.findByName(username);
         if(model == null){
             throw new UsernameNotFoundException(username);
         }

@@ -5,7 +5,6 @@ import com.ap_backend.apirest.repositories.IIconRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.swing.*;
 import java.util.List;
 @Service
 @RequiredArgsConstructor
@@ -16,13 +15,13 @@ public class IconService {
         return iconRepository.findAll();
     }
 
-    public void guardar(IconModel icon){
+    public void save(IconModel icon){
         iconRepository.save(icon);
 
 
     }
 
-    public boolean borrar(IconModel icon){
+    public boolean delete(IconModel icon){
         iconRepository.delete(icon);
 
         return true;

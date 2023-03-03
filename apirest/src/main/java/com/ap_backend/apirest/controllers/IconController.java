@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
 
-import javax.swing.*;
 import java.util.List;
 @RestController
 @RequestMapping("/icons")
@@ -20,19 +19,19 @@ public class IconController {
 
     @PostMapping()
     public ResponseEntity<IconModel> postIcon(@RequestBody IconModel icon){
-        iconService.guardar(icon);
+        iconService.save(icon);
         return ResponseEntity.ok(icon);
     }
 
     @PutMapping()
     public ResponseEntity<IconModel> putIcon(@RequestBody IconModel icon){
-        iconService.guardar(icon);
+        iconService.save(icon);
         return ResponseEntity.ok(icon);
     }
 
     @DeleteMapping()
     public ResponseEntity<Boolean> deleteIcon(@RequestBody IconModel icon){
-        return ResponseEntity.ok(iconService.borrar(icon));
+        return ResponseEntity.ok(iconService.delete(icon));
     }
 
 }

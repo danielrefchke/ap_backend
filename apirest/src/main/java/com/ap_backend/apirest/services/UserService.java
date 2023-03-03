@@ -15,20 +15,20 @@ public class UserService {
     private final IUserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    public UserModel findByNombre(String usrname) throws EntityNotFoundException{
-        return userRepository.findByNombre(usrname).orElseThrow(EntityNotFoundException::new);
+    public UserModel findByName(String username) throws EntityNotFoundException{
+        return userRepository.findByNombre(username).orElseThrow(EntityNotFoundException::new);
     }
 
-    public List<UserModel> usuarios(){
+    public List<UserModel> users(){
         return userRepository.findAll();
     }
 
-    public void guardar(UserModel user){
+    public void save(UserModel user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
-    public boolean borrar(UserModel user){
+    public boolean delete(UserModel user){
         userRepository.delete(user);
         return true;
     }

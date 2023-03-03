@@ -27,6 +27,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, AuthenticationConfigConstants.SIGN_UP_URL).permitAll()
                 .antMatchers(HttpMethod.GET, "/header").permitAll()
                 .antMatchers(HttpMethod.GET, "/icons").permitAll()
+                .antMatchers(HttpMethod.GET, "/images/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
