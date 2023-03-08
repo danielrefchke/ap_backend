@@ -2,12 +2,12 @@ package com.ap_backend.apirest.models;
 
 import com.ap_backend.apirest.views.View;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -34,7 +34,14 @@ public class PersonaModel {
     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference
     @JsonView(View.WithCollections.class)
-    private List<SocialMediaModel> redesSociales = new ArrayList<>();;
+    @JsonProperty("redes")
+    private List<SocialMediaModel> redesSociales ;
+
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
+    @JsonView(View.WithCollections.class)
+    @JsonProperty("secciones")
+    private List<SeccionModel> secciones ;
 
 
 }

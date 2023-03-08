@@ -1,8 +1,12 @@
 package com.ap_backend.apirest.controllers;
 
 import com.ap_backend.apirest.models.PersonaModel;
+import com.ap_backend.apirest.models.responses.PersonaResponse;
 import com.ap_backend.apirest.services.PersonaService;
+import com.ap_backend.apirest.views.View;
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,9 +18,9 @@ import java.util.Optional;
 public class PersonaController {
     private final PersonaService personaService;
 
-    //@JsonView(View.WithCollections.class)
+    @JsonView(View.WithCollections.class)
     @GetMapping("/{id}")
-    public ResponseEntity<PersonaModel> getPersonaById(@PathVariable Long id) {
+    public ResponseEntity<PersonaResponse> getPersonaById(@PathVariable Long id) {
         // Lógica para buscar la persona con el id proporcionado
         Optional<PersonaModel> persona = personaService.getPersonaById(id);
 
@@ -25,8 +29,14 @@ public class PersonaController {
             return ResponseEntity.notFound().build();
         }
 
+        PersonaResponse response = new PersonaResponse();
+        PersonaModel p = persona.get();
+
+
+        BeanUtils.copyProperties(persona.get(),response);
+
         // Devolver la persona encontrada
-        return ResponseEntity.ok(persona.get());
+        return ResponseEntity.ok(response);
     }
 
     @PutMapping()
