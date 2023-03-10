@@ -3,6 +3,7 @@ package com.ap_backend.apirest.controllers;
 import com.ap_backend.apirest.models.PersonaModel;
 import com.ap_backend.apirest.models.SeccionModel;
 import com.ap_backend.apirest.models.requests.SeccionRequest;
+import com.ap_backend.apirest.models.responses.SeccionResponse;
 import com.ap_backend.apirest.services.PersonaService;
 import com.ap_backend.apirest.services.SeccionService;
 import com.ap_backend.apirest.views.View;
@@ -12,6 +13,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,17 +27,20 @@ public class SeccionController {
 
     @GetMapping("/{id}")
     @JsonView(View.WithCollections.class)
-    public ResponseEntity<List<SeccionModel>> getSecciones(@PathVariable Long id){
+    public ResponseEntity<List<SeccionResponse>> getSecciones(@PathVariable Long id){
         Optional<PersonaModel> persona = personaService.getPersonaById(id);
         if(!persona.isPresent()){
             return ResponseEntity.notFound().build();
         }
 
-        for(SeccionModel s : persona.get().getSecciones() ){
-            s.getElementos();
+        ArrayList<SeccionResponse> listaSecciones = new ArrayList<SeccionResponse>();
+        for (SeccionModel s: persona.get().getSecciones()){
+            SeccionResponse r = new SeccionResponse();
+            BeanUtils.copyProperties(s,r);
+            listaSecciones.add(r);
         }
 
-        return ResponseEntity.ok(persona.get().getSecciones());
+        return ResponseEntity.ok(listaSecciones);
     }
 
     @PostMapping("/{id}")

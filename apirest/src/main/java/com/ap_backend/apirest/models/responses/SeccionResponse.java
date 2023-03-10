@@ -1,6 +1,6 @@
 package com.ap_backend.apirest.models.responses;
 
-import com.ap_backend.apirest.models.SocialMediaModel;
+import com.ap_backend.apirest.models.ElementoModel;
 import com.ap_backend.apirest.views.View;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -13,32 +13,21 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class PersonaResponse {
-    @JsonProperty("id")
+public class SeccionResponse {
+
     @JsonView(View.WithCollections.class)
     private Long  id;
-    @JsonProperty("nombre")
     @JsonView(View.WithCollections.class)
     private String nombre;
-
-    @JsonProperty("titulo")
     @JsonView(View.WithCollections.class)
-    private String titulo;
+    @JsonProperty("className")
+    private String  classname;
     @JsonView(View.WithCollections.class)
-    private String descripcion;
+    @JsonProperty("displayMode")
+    private String displaymode;
     @JsonView(View.WithCollections.class)
-    private String imgback;
+    private Integer orden;
     @JsonView(View.WithCollections.class)
-    private String imgpersona;
-    @JsonView(View.WithCollections.class)
-    private String imgcred;
-    @JsonView(View.WithCollections.class)
-    @JsonProperty("redes")
-    private List<SocialMediaModel> redesSociales ;
-
-    @JsonView(View.WithCollections.class)
-    @JsonProperty("secciones")
-    private List<SeccionResponse>  Lsecciones ;
-
-
+    @JsonProperty("elementos")
+    private List<ElementoModel> elementos ;
 }

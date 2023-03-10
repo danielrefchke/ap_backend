@@ -1,7 +1,9 @@
 package com.ap_backend.apirest.controllers;
 
 import com.ap_backend.apirest.models.PersonaModel;
+import com.ap_backend.apirest.models.SeccionModel;
 import com.ap_backend.apirest.models.responses.PersonaResponse;
+import com.ap_backend.apirest.models.responses.SeccionResponse;
 import com.ap_backend.apirest.services.PersonaService;
 import com.ap_backend.apirest.views.View;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -10,6 +12,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @RestController
@@ -34,6 +37,15 @@ public class PersonaController {
 
 
         BeanUtils.copyProperties(persona.get(),response);
+
+        ArrayList<SeccionResponse> listaSecciones = new ArrayList<SeccionResponse>();
+        for (SeccionModel s: persona.get().getSecciones()){
+            SeccionResponse r = new SeccionResponse();
+            BeanUtils.copyProperties(s,r);
+            listaSecciones.add(r);
+        }
+
+        response.setLsecciones(listaSecciones);
 
         // Devolver la persona encontrada
         return ResponseEntity.ok(response);
