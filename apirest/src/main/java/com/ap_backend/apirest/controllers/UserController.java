@@ -29,8 +29,26 @@ public class UserController {
         return ResponseEntity.ok(userService.users());
     }
 
+    @GetMapping("/{name}")
+    @JsonView(View.BasicData.class)
+    public ResponseEntity<UserModel> getUserByName(@PathVariable String name){
+        try {
+            UserModel testUsuario = userService.findByName(name);
+
+            return ResponseEntity.ok(testUsuario);
+        }catch (Exception e){
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @PostMapping()
     public ResponseEntity<UserModel> postUser(@RequestBody UserRequest request){
+
+        UserModel testUsuario = userService.findByName(request.getNombre());
+
+        if (testUsuario != null){
+            return ResponseEntity.unprocessableEntity().build();
+        }
 
         UserModel usuario = new UserModel();
 

@@ -23,7 +23,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final AuthenticationUserService authenticationUserService;
 
     @Override protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable().authorizeRequests()
+        http
+                .cors().and().csrf().disable().authorizeRequests()
+                //.antMatchers(HttpMethod.OPTIONS, AuthenticationConfigConstants.SIGN_UP_URL).permitAll()
                 .antMatchers(HttpMethod.POST, AuthenticationConfigConstants.SIGN_UP_URL).permitAll()
                 .antMatchers(HttpMethod.GET, "/persona/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/icons").permitAll()

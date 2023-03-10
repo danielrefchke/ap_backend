@@ -2,6 +2,7 @@ package com.ap_backend.apirest.controllers;
 
 import com.ap_backend.apirest.models.PersonaModel;
 import com.ap_backend.apirest.models.SeccionModel;
+import com.ap_backend.apirest.models.requests.PersonaRequest;
 import com.ap_backend.apirest.models.responses.PersonaResponse;
 import com.ap_backend.apirest.models.responses.SeccionResponse;
 import com.ap_backend.apirest.services.PersonaService;
@@ -28,7 +29,7 @@ public class PersonaController {
         Optional<PersonaModel> persona = personaService.getPersonaById(id);
 
         // Verificar si la persona fue encontrada
-        if (persona == null) {
+        if (!persona.isPresent() ) {
             return ResponseEntity.notFound().build();
         }
 
@@ -51,11 +52,20 @@ public class PersonaController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping()
-    public ResponseEntity<PersonaModel> putPersona(@RequestBody PersonaModel persona){
-        personaService.savePersona(persona);
+    @PutMapping("/{id}")
+    public ResponseEntity<PersonaModel> putPersona(@RequestBody PersonaRequest personaRequest){
 
-        return ResponseEntity.ok(persona);
+        Optional<PersonaModel> persona = personaService.getPersonaById(personaRequest.getId());
+
+        // Verificar si la persona fue encontrada
+        if (!persona.isPresent() ) {
+            return ResponseEntity.notFound().build();
+        }
+
+        BeanUtils.copyProperties(personaRequest,persona.get());
+        personaService.savePersona(persona.get());
+
+        return ResponseEntity.ok(persona.get());
     }
 
 }
