@@ -5,4 +5,6 @@ public class View {
 
     public interface NoData{}
     public interface WithCollections {}
+
+    public interface Nested{}
 }

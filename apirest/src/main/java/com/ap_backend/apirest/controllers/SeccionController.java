@@ -30,6 +30,11 @@ public class SeccionController {
         if(!persona.isPresent()){
             return ResponseEntity.notFound().build();
         }
+
+        for(SeccionModel s : persona.get().getSecciones() ){
+            s.getElementos();
+        }
+
         return ResponseEntity.ok(persona.get().getSecciones());
     }
 

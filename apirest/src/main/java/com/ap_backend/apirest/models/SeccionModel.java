@@ -1,24 +1,24 @@
 package com.ap_backend.apirest.models;
 
 import com.ap_backend.apirest.views.View;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
 @Data
 @Table(name = "seccion")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class SeccionModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView({View.BasicData.class,View.WithCollections.class})
+    @JsonView({View.BasicData.class,View.WithCollections.class,View.Nested.class})
     private Long  id;
 
     @JsonView({View.BasicData.class,View.WithCollections.class})
@@ -38,7 +38,15 @@ public class SeccionModel {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "personaid")
     @JsonManagedReference
-    @JsonView(View.WithCollections.class)
+    //@JsonView(View.WithCollections.class)
     private PersonaModel persona;
+
+
+    @OneToMany(mappedBy = "seccion",fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
+    @JsonView(View.WithCollections.class)
+    @JsonProperty("elementos")
+    private List<ElementoModel> elementos ;
+
 
 }

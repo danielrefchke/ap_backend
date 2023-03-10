@@ -6,4 +6,6 @@ public class AuthenticationConfigConstants {
     public static final String TOKEN_PREFIX = "Bearer ";
     public static final String HEADER_STRING = "Authorization";
     public static final String SIGN_UP_URL = "/login";
+
+    public static final String DEFAULT_PASSWORD = "12345678";
 }

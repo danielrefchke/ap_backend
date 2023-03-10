@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -39,5 +40,7 @@ public class PersonaResponse {
 
     @JsonView(View.WithCollections.class)
     //@JsonProperty("secciones")
-    private List<SeccionModel>  secciones;
+    private List<SeccionModel>  secciones = new ArrayList<SeccionModel>();
+
+
 }
