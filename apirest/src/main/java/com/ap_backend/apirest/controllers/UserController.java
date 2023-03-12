@@ -3,6 +3,7 @@ package com.ap_backend.apirest.controllers;
 import com.ap_backend.apirest.configs.AuthenticationConfigConstants;
 import com.ap_backend.apirest.models.UserModel;
 import com.ap_backend.apirest.models.requests.UserRequest;
+import com.ap_backend.apirest.models.responses.UserExistResponse;
 import com.ap_backend.apirest.services.UserService;
 import com.ap_backend.apirest.views.View;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -38,6 +39,20 @@ public class UserController {
             return ResponseEntity.ok(testUsuario);
         }catch (Exception e){
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("exist/{name}")
+    public ResponseEntity<UserExistResponse> existUserByName(@PathVariable String name){
+        UserExistResponse response = new UserExistResponse();
+        try {
+            UserModel testUsuario = userService.findByName(name);
+
+            response.setExist(true);
+        }catch (Exception e){
+            response.setExist(false);
+        }finally {
+            return ResponseEntity.ok(response);
         }
     }
 
