@@ -45,6 +45,7 @@ public class SeccionModel {
     @OneToMany(mappedBy = "seccion",fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference
     @JsonView(View.WithCollections.class)
+    @OrderBy("orden")
     @JsonProperty("elementos")
     private List<ElementoModel> elementos ;
 
