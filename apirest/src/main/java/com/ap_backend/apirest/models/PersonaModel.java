@@ -40,6 +40,7 @@ public class PersonaModel {
     @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference
     @JsonView(View.WithCollections.class)
+    @OrderBy("orden")
     @JsonProperty("secciones")
     private List<SeccionModel> secciones ;
 
