@@ -1,2 +1,3 @@
 apirest/uploads/*
 uploads
+apirest/src/main/resources/application.properties
